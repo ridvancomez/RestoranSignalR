@@ -9,6 +9,6 @@ namespace SignalR.DataAccessLayer.Abstract
 {
     public interface IProductDal : IGenericDal<Product>
     {
-        // Custom methods for Product entity can be added here
+        List<Product> GetProductsWithCategory();
     }
 }

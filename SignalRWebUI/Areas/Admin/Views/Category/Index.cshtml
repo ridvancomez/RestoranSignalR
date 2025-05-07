@@ -1,0 +1,37 @@
+﻿@model List<SignalRWebUI.Dtos.CategoryDtos.ResultCategoryDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Layout.cshtml";
+}
+
+<div class="card p-3">
+    <h4 class="page-title">Kategoriler</h4>
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-danger">Veri Bulunamadı</div>
+    }
+    else
+    {
+
+
+        <table class="table table-bordered table-striped mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">İsim</th>
+                    <th scope="col">Durum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

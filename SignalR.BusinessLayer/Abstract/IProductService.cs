@@ -9,6 +9,6 @@ namespace SignalR.BusinessLayer.Abstract
 {
     public interface IProductService : IGenericService<Product>
     {
-        // Custom methods for Product service can be added here
+        List<Product> TGetProductsWithCategory();
     }
 }
