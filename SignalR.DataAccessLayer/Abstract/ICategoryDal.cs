@@ -9,6 +9,8 @@ namespace SignalR.DataAccessLayer.Abstract
 {
     public interface ICategoryDal : IGenericDal<Category>
     {
-        // Custom methods for Category entity can be added here
+        int CategoryCount();
+        int ActiveCategoryCount();
+        int PassiveCategoryCount();
     }
 }

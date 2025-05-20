@@ -9,6 +9,8 @@ namespace SignalR.BusinessLayer.Abstract
 {
     public interface ICategoryService : IGenericService<Category>
     {
-        // Custom methods for Category service can be added here
+        int TCategoryCount();
+        int TActiveCategoryCount();
+        int TPassiveCategoryCount();
     }
 }

@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SignalR.DTOLayer.AboutDto
+namespace SignalRWebUI.Dtos.FeatureDtos
 {
-    public class GetAboutDto
+    public class ResultFeatureDto
     {
         public int Id { get; set; }
-        public string ImageUrl { get; set; } = string.Empty;
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
     }

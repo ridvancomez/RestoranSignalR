@@ -32,9 +32,9 @@ namespace SignalRApi.Controllers
                 _genericService.TAdd(entity);
                 return Ok("Entity Başarılı Bir Şekilde Eklendi");
             }
-            return BadRequest("Entity EKlenirken Bir Hata Oluştu");
+            return BadRequest("Entity Eklenirken Bir Hata Oluştu");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public virtual IActionResult Delete(int id)
         {
             var entity = _genericService.TGetById(id);
@@ -58,7 +58,7 @@ namespace SignalRApi.Controllers
             return BadRequest("Entity Güncellenirken Bir Hata Oluştu");
         }
 
-        [HttpGet("GetEntity")]
+        [HttpGet("{id}")]
         public virtual IActionResult GetEntity(int id)
         {
             var entity = _genericService.TGetById(id);

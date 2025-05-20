@@ -13,10 +13,35 @@ namespace SignalRApi.Controllers
     {
         private readonly IGenericService<Category> _genericService;
         private readonly IMapper _mapper;
-        public CategoryController(IGenericService<Category> genericService, IMapper mapper) : base(genericService, mapper)
+        private readonly ICategoryService _categoryService;
+        public CategoryController(IGenericService<Category> genericService, IMapper mapper, ICategoryService categoryService) : base(genericService, mapper)
         {
+            _categoryService = categoryService;
             _genericService = genericService;
             _mapper = mapper;
         }
+
+        [HttpGet("CategoryCount")]
+        public IActionResult CategoryCount()
+        {
+            var categoryCount = _categoryService.TCategoryCount();
+            return Ok(categoryCount);
+        }
+
+        [HttpGet("ActiveCategoryCount")]
+        public IActionResult ActiveCategoryCount()
+        {
+            var activeCategoryCount = _categoryService.TActiveCategoryCount();
+            return Ok(activeCategoryCount);
+        }
+
+        [HttpGet("PassiveCategoryCount")]
+        public IActionResult PassiveCategoryCount()
+        {
+            var passiveCategoryCount = _categoryService.TPassiveCategoryCount();
+            return Ok(passiveCategoryCount);
+        }
+
+        
     }
 }

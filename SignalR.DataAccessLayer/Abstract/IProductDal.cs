@@ -10,5 +10,13 @@ namespace SignalR.DataAccessLayer.Abstract
     public interface IProductDal : IGenericDal<Product>
     {
         List<Product> GetProductsWithCategory();
+        int ProductCount();
+
+        int ProductCountByHamburger();
+        int ProductCountByDrink();
+        decimal GetAveragePriceProduct();
+        string GetMaxPriceProductName();
+        string GetMinPriceProductName();
+        decimal ProductAvgPriceByHamburger();
     }
 }

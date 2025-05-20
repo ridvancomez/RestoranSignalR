@@ -1,0 +1,58 @@
+﻿@model SignalRWebUI.Dtos.ProductDtos.UpdateProductDto
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Layout.cshtml";
+}
+
+<div class="card p-3">
+    <div class="card-header">
+        <div class="card-title">Ürün Güncelle</div>
+    </div>
+    <form method="post">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" asp-for="Name" placeholder="İsim">
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.CategoryList, "Kategori Seçin", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="number" step="0.01" class="form-control" asp-for="Price" placeholder="Fiyat">
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" asp-for="ImageUrl" placeholder="Resim Yolu">
+                    </div>
+                </div>
+
+                <div class="col-lg-6 d-flex align-items-center">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Status" type="checkbox">
+                            <span class="form-check-sign">Durum</span>
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <textarea class="form-control" asp-for="Description" placeholder="Açıklama"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit">Kaydet</button>
+    </form>
+</div>
+

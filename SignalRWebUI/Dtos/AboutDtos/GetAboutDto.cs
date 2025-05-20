@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SignalR.DTOLayer.AboutDto
+namespace SignalRWebUI.Dtos.AboutDtos
 {
-    public class ResultAboutDto
+    public class GetAboutDto
     {
         public int Id { get; set; }
         public string ImageUrl { get; set; } = string.Empty;

@@ -1,0 +1,49 @@
+﻿ @model SignalRWebUI.Dtos.BookingDtos.CreateBookingDto
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Layout.cshtml";
+}
+
+<div class="card p-3">
+    <div class="card-header">
+        <div class="card-title ml-2">Hakkımda Verisi ekle</div>
+    </div>
+    <form method="post">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" asp-for="Name" placeholder="İsim">
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" asp-for="Number" placeholder="Telefon Numarası">
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="email" class="form-control" asp-for="Email" placeholder="E Posta">
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="number" class="form-control" asp-for="PersonCount" placeholder="Kişi Sayısı">
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="date" class="form-control" asp-for="Date" placeholder="Tarih">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <button class="btn btn-success ml-4" type="submit">Kaydet</button>
+    </form>
+</div>
+

@@ -1,0 +1,36 @@
+﻿@model SignalRWebUI.Dtos.CategoryDtos.CreateCategoryDto
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Layout.cshtml";
+}
+
+<div class="card p-3">
+    <div class="card-header">
+        <div class="card-title ml-2">Kategori</div>
+    </div>
+    <form method="post">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" asp-for="Name" id="email" placeholder="Kategori İsmi">
+                    </div>
+                </div>
+
+                <div class="col-lg-6 d-flex align-items-center">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Status" type="checkbox">
+                            <span class="form-check-sign">Durum</span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <button class="btn btn-success ml-4" type="submit">Kaydet</button>
+    </form>
+</div>
+

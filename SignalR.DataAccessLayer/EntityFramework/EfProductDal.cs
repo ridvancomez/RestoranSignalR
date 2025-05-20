@@ -19,6 +19,22 @@ namespace SignalR.DataAccessLayer.EntityFramework
             _context = context;
         }
 
+        public decimal GetAveragePriceProduct()
+        {
+            return (decimal)_context.Products
+                .Average(x => x.Price);
+        }
+
+        public string GetMaxPriceProductName()
+        {
+            return _context.Products.Where(x => x.Price == _context.Products.Max(y => y.Price)).Select(z => z.Name).FirstOrDefault() ?? "Ürün Bulunamadı";
+        }
+
+        public string GetMinPriceProductName()
+        {
+            return _context.Products.Where(x => x.Price == _context.Products.Min(y => y.Price)).Select(z => z.Name).FirstOrDefault() ?? "Ürün Bulunamadı";
+        }
+
         public List<Product> GetProductsWithCategory()
         {
             var list = _context.Products
@@ -26,6 +42,35 @@ namespace SignalR.DataAccessLayer.EntityFramework
                 .ToList();
 
             return list;
+        }
+
+        public int ProductCount()
+        {
+            return _context.Products.Count();
+        }
+
+        public int ProductCountByDrink()
+        {
+            return _context.Products
+                .Where(x => x.CategoryId == 
+                _context.Categories.Where(y => y.Name == "İçecek").Select(z=> z.Id).FirstOrDefault())
+                .Count();
+        }
+
+        public int ProductCountByHamburger()
+        {
+            return _context.Products
+                .Where(x => x.CategoryId ==
+                _context.Categories.Where(y => y.Name == "Hamburger").Select(z => z.Id).FirstOrDefault())
+                .Count();
+        }
+
+        public decimal ProductAvgPriceByHamburger()
+        {
+            return _context.Products.
+                Where(x => x.CategoryId == _context.Categories.
+                Where(y => y.Name == "Hamburger").
+                Select(z => z.Id).FirstOrDefault()).Average(w => w.Price);
         }
     }
 }

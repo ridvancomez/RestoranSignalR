@@ -1,0 +1,61 @@
+﻿@model List<SignalRWebUI.Dtos.BookingDtos.ResultBookingDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Layout.cshtml";
+}
+
+<div class="card p-3">
+    <div class="card-header">
+        <div class="card-title">Rezervasyon</div>
+    </div>
+    @if (Model == null)
+    {
+        <div class="alert alert-danger">Veri Bulunamadı</div>
+    }
+    else
+    {
+
+        <div class="d-flex justify-content-end">
+
+            <a href="/Admin/Booking/Create" class="btn btn-success">Yeni Rezervasyon Ekle</a>
+        </div>
+        <table class="table table-bordered table-striped mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">İsim</th>
+                    <th scope="col">Numara</th>
+                    <th scope="col">E Posta</th>
+                    <th scope="col">Misafir Sayısı</th>
+                    <th scope="col">Tarih</th>
+                    <th scope="col">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Number</td>
+                        <td>@item.Email</td>
+                        <td>@item.PersonCount</td>
+                        <td>@item.Date.ToString("dd/MMM/yyyy")</td>
+                        <td style="position: relative;">
+
+                            <div class="nav-item dropdown">
+                                <button style="border:none; background-color:transparent; cursor:pointer" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false"><i class="la la-bars" style="font-size:22px"></i></button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/Admin/Booking/Update/@item.Id">Güncelle</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/Admin/Booking/Delete/@item.Id">Sil</a></li>
+                                </ul>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
