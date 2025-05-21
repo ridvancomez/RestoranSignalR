@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DTOLayer.MenuTable;
 using SignalR.EntityLayer.Entites;
+using SignalRApi.Constants;
+using SignalRApi.Hubs;
 
 namespace SignalRApi.Controllers
 {
@@ -12,7 +15,7 @@ namespace SignalRApi.Controllers
     public class MenuTableController : BaseCrudControllerController<MenuTable, CreateMenuTableDto, UpdateMenuTableDto>
     {
         private readonly IMenuTableService _menuTableService;
-        public MenuTableController(IGenericService<MenuTable> genericService, IMapper mapper, IMenuTableService menuTableService) : base(genericService, mapper)
+        public MenuTableController(IGenericService<MenuTable> genericService, IMapper mapper, IMenuTableService menuTableService, IHubContext<SignalRHub> hubContext) : base(genericService, mapper, hubContext, SignalREventNames.MenuTable)
         {
             _menuTableService = menuTableService;
         }

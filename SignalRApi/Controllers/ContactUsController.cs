@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DTOLayer.ContactUs;
 using SignalR.EntityLayer.Entites;
+using SignalRApi.Constants;
+using SignalRApi.Hubs;
 
 namespace SignalRApi.Controllers
 {
@@ -11,7 +14,7 @@ namespace SignalRApi.Controllers
     [ApiController]
     public class ContactUsController : BaseCrudControllerController<ContactUs, CreateContactUsDto, UpdateContactUsDto>
     {
-        public ContactUsController(IGenericService<ContactUs> genericService, IMapper mapper) : base(genericService, mapper)
+        public ContactUsController(IGenericService<ContactUs> genericService, IMapper mapper, IHubContext<SignalRHub> hubContext) : base(genericService, mapper, hubContext, SignalREventNames.ContactUs)
         {
         }
     }

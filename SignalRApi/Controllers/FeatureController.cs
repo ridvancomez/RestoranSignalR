@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DTOLayer.Feature;
 using SignalR.EntityLayer.Entites;
+using SignalRApi.Constants;
+using SignalRApi.Hubs;
 
 namespace SignalRApi.Controllers
 {
@@ -11,7 +14,7 @@ namespace SignalRApi.Controllers
     [ApiController]
     public class FeatureController : BaseCrudControllerController<Feature, CreateFeatureDto, UpdateFeatureDto>
     {
-        public FeatureController(IGenericService<Feature> genericService, IMapper mapper) : base(genericService, mapper)
+        public FeatureController(IGenericService<Feature> genericService, IMapper mapper, IHubContext<SignalRHub> hubContext) : base(genericService, mapper, hubContext, SignalREventNames.Feature)
         {
         }
     }

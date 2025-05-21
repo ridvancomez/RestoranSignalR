@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DTOLayer.Category;
 using SignalR.EntityLayer.Entites;
+using SignalRApi.Constants;
+using SignalRApi.Hubs;
 
 namespace SignalRApi.Controllers
 {
@@ -11,14 +14,10 @@ namespace SignalRApi.Controllers
     [ApiController]
     public class CategoryController : BaseCrudControllerController<Category, CreateCategoryDto, UpdateCategoryDto>
     {
-        private readonly IGenericService<Category> _genericService;
-        private readonly IMapper _mapper;
         private readonly ICategoryService _categoryService;
-        public CategoryController(IGenericService<Category> genericService, IMapper mapper, ICategoryService categoryService) : base(genericService, mapper)
+        public CategoryController(IGenericService<Category> genericService, IMapper mapper, ICategoryService categoryService, IHubContext<SignalRHub> hubContext) : base(genericService, mapper, hubContext, SignalREventNames.Category)
         {
             _categoryService = categoryService;
-            _genericService = genericService;
-            _mapper = mapper;
         }
 
         [HttpGet("CategoryCount")]

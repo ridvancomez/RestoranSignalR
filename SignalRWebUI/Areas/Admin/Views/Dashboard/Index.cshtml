@@ -17,9 +17,7 @@
             connection.start().then( () => {
                 $("#connstatus").text(connection.state);
                 
-                setInterval(()=>{
                     connection.invoke("SendCategoryCount");
-                }, 1000)
             }).catch(function (err) {
                 return console.log(err.toString());
             });

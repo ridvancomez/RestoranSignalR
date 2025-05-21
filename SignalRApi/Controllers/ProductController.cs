@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DTOLayer.Product;
 using SignalR.EntityLayer.Entites;
+using SignalRApi.Constants;
+using SignalRApi.Hubs;
 
 namespace SignalRApi.Controllers
 {
@@ -13,7 +16,7 @@ namespace SignalRApi.Controllers
     {
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
-        public ProductController(IGenericService<Product> genericService, IMapper mapper, IProductService productService) : base(genericService, mapper)
+        public ProductController(IGenericService<Product> genericService, IMapper mapper, IProductService productService, IHubContext<SignalRHub> hubContext) : base(genericService, mapper, hubContext, SignalREventNames.Product)
         {
             _productService = productService;
             _mapper = mapper;

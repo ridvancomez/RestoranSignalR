@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DTOLayer.Testimonial;
 using SignalR.EntityLayer.Entites;
+using SignalRApi.Hubs;
+using SignalRApi.Constants;
 
 namespace SignalRApi.Controllers
 {
@@ -11,8 +14,10 @@ namespace SignalRApi.Controllers
     [ApiController]
     public class TestimonialController : BaseCrudControllerController<Testimonial, CreateTestimonialDto, UpdateTestimonialDto>
     {
-        public TestimonialController(IGenericService<Testimonial> genericService, IMapper mapper) : base(genericService, mapper)
+        
+        public TestimonialController(IGenericService<Testimonial> genericService, IMapper mapper, IHubContext<SignalRHub> hubContext ) : base(genericService, mapper, hubContext, SignalREventNames.Testimonial)
         {
+            
         }
     }
 }
