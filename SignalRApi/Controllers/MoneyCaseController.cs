@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DTOLayer.MoneyCase;
 using SignalR.EntityLayer.Entites;
-using SignalRApi.Constants;
+using SignalRApi.Features.Shared;
 using SignalRApi.Hubs;
 
 namespace SignalRApi.Controllers
@@ -15,7 +15,7 @@ namespace SignalRApi.Controllers
     public class MoneyCaseController : BaseCrudControllerController<MoneyCase, CreateMoneyCaseDto, UpdateMoneyCaseDto>
     {
         private readonly IMoneyCaseService _moneyCaseService;
-        public MoneyCaseController(IGenericService<MoneyCase> genericService, IMapper mapper, IMoneyCaseService moneyCaseService, IHubContext<SignalRHub> hubContext) : base(genericService, mapper, hubContext, SignalREventNames.MoneyCase)
+        public MoneyCaseController(IGenericService<MoneyCase> genericService, IMapper mapper, IMoneyCaseService moneyCaseService, DefaultCrudEventStrategy defaultCrudEventStrategy) : base(genericService, mapper, defaultCrudEventStrategy)
         {
             _moneyCaseService = moneyCaseService;
         }

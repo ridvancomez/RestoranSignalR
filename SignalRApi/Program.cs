@@ -7,6 +7,9 @@ using SignalR.DataAccessLayer.EntityFramework;
 using SignalR.DataAccessLayer.Repositories;
 using SignalR.EntityLayer.Entites;
 using SignalRApi.Extension;
+using SignalRApi.Features.CategoryFeature;
+using SignalRApi.Features.ProductFature;
+using SignalRApi.Features.Shared;
 using SignalRApi.Hubs;
 using SignalRApi.Mapping;
 using System;
@@ -26,7 +29,6 @@ builder.Services.AddCors(opt =>
     });
 });
 
-builder.Services.AddSignalR();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -34,8 +36,12 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddProjectServices();
 
-//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<SignalRHub>();
+builder.Services.AddScoped<ProductCrudEventStrategy>();
+builder.Services.AddScoped<CategoryCrudEventStrategy>();
+builder.Services.AddScoped<DefaultCrudEventStrategy>();
 
 
 builder.Services.AddEndpointsApiExplorer();

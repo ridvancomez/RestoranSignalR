@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DTOLayer.Discount;
 using SignalR.EntityLayer.Entites;
-using SignalRApi.Constants;
+using SignalRApi.Features.Shared;
 using SignalRApi.Hubs;
 
 namespace SignalRApi.Controllers
@@ -14,7 +14,7 @@ namespace SignalRApi.Controllers
     [ApiController]
     public class DiscountController : BaseCrudControllerController<Discount, CreateDiscountDto, UpdateDiscountDto>
     {
-        public DiscountController(IGenericService<Discount> genericService, IMapper mapper, IHubContext<SignalRHub> hubContext) : base(genericService, mapper, hubContext, SignalREventNames.Discount)
+        public DiscountController(IGenericService<Discount> genericService, IMapper mapper, DefaultCrudEventStrategy defaultCrudEventStrategy) : base(genericService, mapper, defaultCrudEventStrategy)
         {
         }
     }

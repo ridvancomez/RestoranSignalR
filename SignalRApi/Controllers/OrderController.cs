@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DTOLayer.Order;
 using SignalR.EntityLayer.Entites;
-using SignalRApi.Constants;
+using SignalRApi.Features.Shared;
 using SignalRApi.Hubs;
 
 namespace SignalRApi.Controllers
@@ -15,7 +15,7 @@ namespace SignalRApi.Controllers
     public class OrderController : BaseCrudControllerController<Order, CreateOrderDto, UpdateOrderDto>
     {
         private readonly IOrderService _orderService;
-        public OrderController(IGenericService<Order> genericService, IMapper mapper, IOrderService orderService, IHubContext<SignalRHub> hubContext) : base(genericService, mapper, hubContext, SignalREventNames.Order)
+        public OrderController(IGenericService<Order> genericService, IMapper mapper, IOrderService orderService, DefaultCrudEventStrategy defaultCrudEventStrategy) : base(genericService, mapper, defaultCrudEventStrategy)
         {
             _orderService = orderService;
         }

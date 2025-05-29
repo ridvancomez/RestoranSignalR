@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DTOLayer.Product;
 using SignalR.EntityLayer.Entites;
-using SignalRApi.Constants;
+using SignalRApi.Features.ProductFature;
 using SignalRApi.Hubs;
 
 namespace SignalRApi.Controllers
@@ -16,7 +16,7 @@ namespace SignalRApi.Controllers
     {
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
-        public ProductController(IGenericService<Product> genericService, IMapper mapper, IProductService productService, IHubContext<SignalRHub> hubContext) : base(genericService, mapper, hubContext, SignalREventNames.Product)
+        public ProductController(IGenericService<Product> genericService, IMapper mapper, IProductService productService, ProductCrudEventStrategy productCrudEventStrategy) : base(genericService, mapper, productCrudEventStrategy)
         {
             _productService = productService;
             _mapper = mapper;

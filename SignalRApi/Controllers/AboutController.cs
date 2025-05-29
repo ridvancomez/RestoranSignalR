@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DTOLayer.About;
 using SignalR.EntityLayer.Entites;
-using SignalRApi.Constants;
+using SignalRApi.Features.Shared;
 using SignalRApi.Hubs;
 
 namespace SignalRApi.Controllers
@@ -13,12 +13,8 @@ namespace SignalRApi.Controllers
     [ApiController]
     public class AboutController : BaseCrudControllerController<About, CreateAboutDto, UpdateAboutDto>
     {
-        private readonly IGenericService<About> _genericService;
-        private readonly IMapper _mapper;
-        public AboutController(IGenericService<About> genericService, IMapper mapper, IHubContext<SignalRHub> hubContext) : base(genericService, mapper, hubContext, SignalREventNames.About)
+        public AboutController(IGenericService<About> genericService, IMapper mapper, DefaultCrudEventStrategy defaultCrudEventStrategy) : base(genericService, mapper, defaultCrudEventStrategy)
         {
-            _genericService = genericService;
-            _mapper = mapper;
         }
     }
 }
