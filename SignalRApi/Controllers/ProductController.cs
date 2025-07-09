@@ -78,5 +78,13 @@ namespace SignalRApi.Controllers
             var productAvgPriceByHamburger = _productService.TProductAvgPriceByHamburger();
             return Ok(productAvgPriceByHamburger);
         }
+
+        [HttpGet("GetProductWithFeatured")]
+        public IActionResult GetProductWithFeatured()
+        {
+            var products = _productService.TGetProductWithFeatured();
+            var result = _mapper.Map<List<ResultProductDto>>(products);
+            return Ok(result);
+        }
     }
 }

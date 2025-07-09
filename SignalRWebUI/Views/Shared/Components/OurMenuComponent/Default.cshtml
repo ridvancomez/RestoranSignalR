@@ -1,0 +1,59 @@
+﻿@using SignalR.DTOLayer.Product
+@model List<ResultProductDto>
+<section class="food_section layout_padding-bottom">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>
+                Menümüz
+            </h2>
+        </div>
+
+        <ul class="filters_menu">
+            <li class="active" data-filter="*">All</li>
+            @for(int i = 0; i< ViewBag.Categories.Count; i++)
+            {
+                <li data-filter=".@ViewBag.Categories[i].Id">@ViewBag.Categories[i].Name</li>
+            }
+        </ul>
+
+        <div class="filters-content">
+            <div class="row grid">
+                
+                @foreach(var item in Model)
+                {
+                    <div class="col-sm-6 col-lg-4 all @item.CategoryId">
+                        <div class="box">
+                            <div>
+                                <div class="img-box">
+                                    <img src="@item.ImageUrl" alt="">
+                                </div>
+                                <div class="detail-box">
+                                    <h5>
+                                        @item.Name
+                                    </h5>
+                                    <p>
+                                        @item.Description
+                                    </p>
+                                    <div class="options">
+                                        <h6>
+                                            @item.Price ₺
+                                        </h6>
+                                        <a href="">
+                                            <i class="bi bi-cart-fill m-1 text-white" style="cursor:pointer"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                
+            </div>
+        </div>
+        <div class="btn-box">
+            <a href="">
+                Daha Fazla Göster
+            </a>
+        </div>
+    </div>
+</section>

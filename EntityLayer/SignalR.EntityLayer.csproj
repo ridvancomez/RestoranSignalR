@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SignalR.DTOLayer\SignalR.DTOLayer.csproj" />
+  </ItemGroup>
+
 </Project>

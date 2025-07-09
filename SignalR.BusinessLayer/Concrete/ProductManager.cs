@@ -77,5 +77,10 @@ namespace SignalR.BusinessLayer.Concrete
         {
             return _productDal.ProductAvgPriceByHamburger();
         }
+
+        public List<Product> TGetProductWithFeatured()
+        {
+            return _productDal.GetProductWithFeatured();
+        }
     }
 }

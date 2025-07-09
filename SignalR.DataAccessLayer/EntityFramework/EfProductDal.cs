@@ -72,5 +72,13 @@ namespace SignalR.DataAccessLayer.EntityFramework
                 Where(y => y.Name == "Hamburger").
                 Select(z => z.Id).FirstOrDefault()).Average(w => w.Price);
         }
+
+        public List<Product> GetProductWithFeatured()
+        {
+            return _context.Products
+                .Where(x => x.Featured == true && x.Status == true)
+                .Include(x => x.Category)
+                .ToList();
+        }
     }
 }

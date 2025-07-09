@@ -2,7 +2,26 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- offer section -->
+@section SliderSection{
+    @await Component.InvokeAsync("SliderComponent")
+}
+
+@await Component.InvokeAsync("DiscountComponent")
+
+
+<!-- end offer section -->
+<!-- food section -->
+@await Component.InvokeAsync("OurMenuComponent")
+
+<!-- end food section -->
+<!-- about section -->
+@await Component.InvokeAsync("AboutComponent")
+
+<!-- end about section -->
+<!-- book section -->
+@await Component.InvokeAsync("ContactComponent")
+
+<!-- end book section -->
+<!-- client section -->
+@await Component.InvokeAsync("TestimonialComponent")

@@ -18,5 +18,6 @@ namespace SignalR.DataAccessLayer.Abstract
         string GetMaxPriceProductName();
         string GetMinPriceProductName();
         decimal ProductAvgPriceByHamburger();
+        List<Product> GetProductWithFeatured();
     }
 }

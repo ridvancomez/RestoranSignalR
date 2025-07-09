@@ -8,37 +8,97 @@
 <script src="~/js/site.js" asp-append-version="true"></script>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        var connection = new signalR.HubConnectionBuilder()
-            .withUrl("https://localhost:7272/SignalRHub").build();
+            $(document).ready(function () {
+            var connection = new signalR.HubConnectionBuilder()
+                .withUrl("https://localhost:7272/SignalRHub")
+                .build();
 
-            connection.start().then( () => {
+            function startConnectionWithRetry(retryCount = 0) {
+                connection.start().then(() => {
+                    console.log("SignalR bağlantısı kuruldu.");
                     connection.invoke("SendCategoryCount");
                     connection.invoke("SendProductCount");
                     connection.invoke("SendActiveCategoryCount");
                     connection.invoke("SendPassiveCategoryCount");
-                    
-            }).catch(function (err) {
-                return console.log(err.toString());
+                    connection.invoke("SendHamburgerCount");
+                    connection.invoke("SendDrinkCount");
+                    connection.invoke("SendAvgProductPrice");
+                    connection.invoke("SendMaxProductPrice");
+                    connection.invoke("SendMinProductPrice");
+                    connection.invoke("SendAvgHamburgerPrice");
+                    connection.invoke("SendOrderCount");
+                    connection.invoke("SendActiveOrderCount");
+                    connection.invoke("SendLastOrderAmount");
+                    connection.invoke("SendMoneyCaseAmount");
+                    connection.invoke("SendMenuTableCount");
+                }).catch(err => {
+                    console.error("Bağlantı hatası:", err.toString());
+
+                    // Maksimum 5 deneme yap
+                    if (retryCount < 5) {
+                        setTimeout(() => {
+                            startConnectionWithRetry(retryCount + 1);
+                        }, 2000); // 2 saniye bekle, sonra tekrar dene
+                    } else {
+                        console.error("SignalR bağlantısı başarısız oldu. Maksimum deneme sayısına ulaşıldı.");
+                    }
+                });
+            }
+
+            startConnectionWithRetry();
+
+
+            connection.on("ReceiveCategory", (value) => {
+                $("#categoryCount").text(value);
             });
 
-        connection.on("ReceiveCategory", (value) => {
-            $("#categoryCount").text(value);
+            connection.on("ReceiveProduct", (value) =>
+             {
+                 $("#productCount").text(value);
+             });
+
+                 connection.on("ReceiveActiveCategory", (value) => {
+                    $("#activeCategoryCount").text(value);});
+
+                        connection.on("ReceivePassiveCategory", (value) => {
+                    $("#passiveCategoryCount").text(value);});
+
+
+             connection.on("ReceiveHamburgerCount", (value) => {
+                $("#productCountWithHamburgerCategory").text(value);});
+
+                connection.on("ReceiveDrinkCount", (value) => {
+                $("#productCountWithDrinkCategory").text(value);});
+
+                connection.on("ReceiveAvgProductPrice", (value) => {
+                $("#avarageProductPrice").text(value + "₺");});
+
+                connection.on("ReceiveMaxProductPrice", (value) => {
+                $("#highestProduct").text(value);});
+
+                connection.on("ReceiveMinProductPrice", (value) => {
+                $("#lowestProduct").text(value);});
+
+                connection.on("ReceiveAvgHamburgerPrice", (value) => {
+                $("#avarageHamburgerProductPrice").text(value + "₺");});
+
+                connection.on("ReceiveOrderCount", (value) => {
+                $("#totalOrderCount").text(value);});
+
+                connection.on("ReceiveActiveOrderCount", (value) => {
+                $("#activeOrderCount").text(value);});
+
+                connection.on("ReceiveMoneyCaseAmount", (value) => {
+                $("#moneyCaseAmount").text(value + "₺");});
+
+                connection.on("ReceiveLastOrderAmount", (value) => {
+                $("#lastOrderAmount").text(value + "₺");});
+
+                connection.on("ReceiveMenuTableCount", (value) => {
+                $("#tableCount").text(value);});
+
         });
-
-        connection.on("ReceiveProduct", (value) =>
-         {
-             $("#productCount").text(value);
-         });
-
-         connection.on("ReceiveActiveCategory", (value) => {
-            $("#activeCategoryCount").text(value);});
-
-            connection.on("ReceivePassiveCategory", (value) => {
-            $("#passiveCategoryCount").text(value);});
-
-    });
-</script>
+    // </script>
 
 <div class="container-fluid">
     <h4 class="page-title">Dashboard</h4>
@@ -131,8 +191,8 @@
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Kategoriye Göre Ürün</p>
-                                <h4 class="card-title" id="productWithCategory1"></h4>
+                                <p class="card-category">Hamburger Sayısı</p>
+                                <h4 class="card-title" id="productCountWithHamburgerCategory"></h4>
                             </div>
                         </div>
                     </div>
@@ -150,8 +210,8 @@
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">Kategoriye Göre Ürün</p>
-                                <h4 class="card-title" id="productWithCategory2"></h4>
+                                <p class="card-category">İçecek Sayısı</p>
+                                <h4 class="card-title" id="productCountWithDrinkCategory"></h4>
                             </div>
                         </div>
                     </div>
@@ -188,8 +248,8 @@
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">En Yüksek Ürün Fiyatı</p>
-                                <h4 class="card-title" id="highestProductPrice"></h4>
+                                <p class="card-category">En Yüksek Ürün</p>
+                                <h4 class="card-title" id="highestProduct"></h4>
                             </div>
                         </div>
                     </div>
@@ -208,8 +268,8 @@
                         </div>
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
-                                <p class="card-category">En Düşük Ürün Fiyatı</p>
-                                <h4 class="card-title" id="lowestProductPrice"></h4>
+                                <p class="card-category">En Düşük Ürün</p>
+                                <h4 class="card-title" id="lowestProduct"></h4>
                             </div>
                         </div>
                     </div>
@@ -324,7 +384,7 @@
                         <div class="col-7 d-flex align-items-center">
                             <div class="numbers">
                                 <p class="card-category">Bugünkü Kazanç</p>
-                                <h4 class="card-title" id="todaysEarning"></h4>
+                                <h4 class="card-title" id="todaysEarning">3315₺</h4>
                             </div>
                         </div>
                     </div>

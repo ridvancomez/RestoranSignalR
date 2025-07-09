@@ -15,7 +15,7 @@ namespace SignalRApi.Controllers
     public class MoneyCaseController : BaseCrudControllerController<MoneyCase, CreateMoneyCaseDto, UpdateMoneyCaseDto>
     {
         private readonly IMoneyCaseService _moneyCaseService;
-        public MoneyCaseController(IGenericService<MoneyCase> genericService, IMapper mapper, IMoneyCaseService moneyCaseService, DefaultCrudEventStrategy defaultCrudEventStrategy) : base(genericService, mapper, defaultCrudEventStrategy)
+        public MoneyCaseController(IGenericService<MoneyCase> genericService, IMapper mapper, IMoneyCaseService moneyCaseService, DefaultCrudEventStrategy menuCaseCrudEventStrategy) : base(genericService, mapper, menuCaseCrudEventStrategy)
         {
             _moneyCaseService = moneyCaseService;
         }

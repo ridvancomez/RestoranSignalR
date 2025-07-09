@@ -8,6 +8,9 @@ using SignalR.DataAccessLayer.Repositories;
 using SignalR.EntityLayer.Entites;
 using SignalRApi.Extension;
 using SignalRApi.Features.CategoryFeature;
+using SignalRApi.Features.MenuTableFeature;
+using SignalRApi.Features.MoneyCaseFeature;
+using SignalRApi.Features.OrderFeature;
 using SignalRApi.Features.ProductFature;
 using SignalRApi.Features.Shared;
 using SignalRApi.Hubs;
@@ -41,6 +44,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<SignalRHub>();
 builder.Services.AddScoped<ProductCrudEventStrategy>();
 builder.Services.AddScoped<CategoryCrudEventStrategy>();
+builder.Services.AddScoped<MenuTableCrudEventStrategy>();
+builder.Services.AddScoped<OrderCrudEventStrategy>();
+builder.Services.AddScoped<MoneyCaseCrudEventStrategy>();
 builder.Services.AddScoped<DefaultCrudEventStrategy>();
 
 

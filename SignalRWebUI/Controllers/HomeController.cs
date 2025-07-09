@@ -15,6 +15,7 @@ namespace SignalRWebUI.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Page = "";
             return View();
         }
 

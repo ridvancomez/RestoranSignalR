@@ -76,6 +76,11 @@ namespace SignalRApi.Extension
             services.AddScoped<IGenericDal<MenuTable>, GenericRepository<MenuTable>>();
             services.AddScoped<IGenericService<MenuTable>, MenuTableManager>();
 
+            services.AddScoped<ISliderService, SliderManager>();
+            services.AddScoped<ISliderDal, EfSliderDal>();
+            services.AddScoped<IGenericDal<Slider>, GenericRepository<Slider>>();
+            services.AddScoped<IGenericService<Slider>, SliderManager>();
+
             return services;
         }
     }
