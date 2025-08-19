@@ -9,15 +9,18 @@ namespace SignalRApi.Hubs
         private readonly IOrderService _orderService;
         private readonly IMoneyCaseService _moneyCaseService;
         private readonly IMenuTableService _menuTableService;
+        private readonly IBookingService _bookingService;
+        private readonly INotificationService _notificationService;
 
-
-        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, IMenuTableService menuTableService)
+        public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, IMenuTableService menuTableService, IBookingService bookingService, INotificationService notificationService)
         {
             _categoryService = categoryService;
             _productService = productService;
             _orderService = orderService;
             _moneyCaseService = moneyCaseService;
             _menuTableService = menuTableService;
+            _bookingService = bookingService;
+            _notificationService = notificationService;
         }
 
         public async Task SendCategoryCount()
@@ -108,6 +111,24 @@ namespace SignalRApi.Hubs
         {
             var menuTableCount = _menuTableService.TMenuTableCount();
             await Clients.All.SendAsync("ReceiveMenuTableCount", menuTableCount);
+        }
+
+        public async Task GetBookingList()
+        {
+            var bookingList = _bookingService.TGetList();
+            await Clients.All.SendAsync("ReceiveBookingList", bookingList);
+        }
+
+        public async Task SendNotification()
+        {
+            var value = _notificationService.NotificationCountByStatusFalse();
+            await Clients.All.SendAsync("ReceiveNotificationCountByFalse", value);
+        }
+
+        public async Task GetNotificationList()
+        {
+            var notifications = _notificationService.GetListByStatusFalse();
+            await Clients.All.SendAsync("ReceiveNotificationList", notifications);
         }
     }
 }

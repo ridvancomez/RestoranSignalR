@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DTOLayer.Booking;
 using SignalR.EntityLayer.Entites;
+using SignalRApi.Features.BookingFeature;
+using SignalRApi.Features.CategoryFeature;
 using SignalRApi.Features.Shared;
 using SignalRApi.Hubs;
 
@@ -14,7 +16,7 @@ namespace SignalRApi.Controllers
     [ApiController]
     public class BookingController : BaseCrudControllerController<Booking, CreateBookingDto, UpdateBookingDto>
     {
-        public BookingController(IGenericService<Booking> genericService, IMapper mapper, DefaultCrudEventStrategy defaultCrudEventStrategy) : base(genericService, mapper, defaultCrudEventStrategy)
+        public BookingController(IGenericService<Booking> genericService, IMapper mapper, ICategoryService bookingService, IHubContext<SignalRHub> hubContext, BookingCrudEventStrategy bookingCrudEventStrategy) : base(genericService, mapper, bookingCrudEventStrategy)
         {
         }
     }

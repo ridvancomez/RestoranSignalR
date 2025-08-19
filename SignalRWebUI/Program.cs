@@ -1,8 +1,14 @@
+using SignalR.BusinessLayer.Abstract;
+using SignalR.BusinessLayer.Concrete;
+using SignalR.DataAccessLayer.Abstract;
+using SignalR.DataAccessLayer.EntityFramework;
+using SignalR.DataAccessLayer.Repositories;
+using SignalR.EntityLayer.Entites;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpClient();
 // Add services to the container.
-
 
 builder.Services.AddControllersWithViews();
 

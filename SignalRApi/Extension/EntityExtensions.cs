@@ -81,6 +81,16 @@ namespace SignalRApi.Extension
             services.AddScoped<IGenericDal<Slider>, GenericRepository<Slider>>();
             services.AddScoped<IGenericService<Slider>, SliderManager>();
 
+            services.AddScoped<IBasketService, BasketManager>();
+            services.AddScoped<IBasketDal, EfBasketDal>();
+            services.AddScoped<IGenericDal<Basket>, GenericRepository<Basket>>();
+            services.AddScoped<IGenericService<Basket>, BasketManager>();
+
+            services.AddScoped<INotificationService, NotificationManager>();
+            services.AddScoped<INotificationDal, EfNotificationDal>();
+            services.AddScoped<IGenericDal<Notification>, GenericRepository<Notification>>();
+            services.AddScoped<IGenericService<Notification>, NotificationManager>();
+
             return services;
         }
     }

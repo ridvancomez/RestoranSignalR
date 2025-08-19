@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace SignalR.EntityLayer.Entites
 {
-    public class MenuTable
+    public class Notification
     {
         public int Id { get; set; }
-        public string Name { get; set; } = String.Empty;
+        public string Type { get; set; } = string.Empty;
+        public string Icon { get; set; }
+        public string Description { get; set; } = string.Empty;
+        public DateTime Date { get; set; }
         public bool Status { get; set; }
-
-        public List<Basket>? Baskets { get; set; }
     }
 }

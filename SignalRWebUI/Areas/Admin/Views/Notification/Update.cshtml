@@ -1,13 +1,12 @@
-﻿@model SignalRWebUI.Dtos.AboutDtos.UpdateAboutDto
+﻿@model SignalRWebUI.Dtos.NotifacitonDtos.UpdateNotificationDto
 @{
-    
     ViewData["Title"] = "Update";
     Layout = "~/Areas/Admin/Views/AdminLayout/Layout.cshtml";
 }
 
 <div class="card p-3">
     <div class="card-header">
-        <div class="card-title">Hakkımda Verisi Güncelle</div>
+        <div class="card-title">Bildirim Verisi Güncelle</div>
     </div>
     <form method="post">
         <div class="card-body">
@@ -15,19 +14,32 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <input type="hidden" asp-for="Id">
-                        <input type="text" class="form-control" asp-for="Title" placeholder="Başlık">
+                        <input type="text" class="form-control" asp-for="Type" placeholder="Tip">
                     </div>
                 </div>
 
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <input type="text" class="form-control" asp-for="ImageUrl" placeholder="Resim Yolu">
+                        <input type="text" class="form-control" asp-for="Icon" placeholder="İkon">
                     </div>
                 </div>
 
                 <div class="col-lg-12">
                     <div class="form-group">
                         <textarea class="form-control" asp-for="Description" placeholder="Açıklama"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="Date">Tarih</label>
+                        <input type="datetime-local" class="form-control" asp-for="Date">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group d-flex">
+                        <label for="Status" style="margin: 0px !important; padding-right:10px">Durum</label>
+                        <input type="checkbox" style="position:static" asp-for="Status">
                     </div>
                 </div>
             </div>
