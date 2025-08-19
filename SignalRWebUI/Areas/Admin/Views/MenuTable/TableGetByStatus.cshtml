@@ -1,0 +1,105 @@
+﻿@model List<SignalRWebUI.Dtos.MenuTableDtos.ResultMenuTableDto>
+@{
+    ViewData["Title"] = "TableGetByStatus";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Layout.cshtml";
+}
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<script type="text/javascript">
+            $(document).ready(function () {
+            var connection = new signalR.HubConnectionBuilder()
+                .withUrl("https://localhost:7272/SignalRHub")
+                .build();
+
+            function startConnectionWithRetry(retryCount = 0) {
+                connection.start().then(() => {
+                    console.log("SignalR bağlantısı kuruldu.");
+                    connection.invoke("SendMenuTable");
+                }).catch(err => {
+                    console.error("Bağlantı hatası:", err.toString());
+
+                    // Maksimum 5 deneme yap
+                    if (retryCount < 5) {
+                        setTimeout(() => {
+                            startConnectionWithRetry(retryCount + 1);
+                        }, 2000); // 2 saniye bekle, sonra tekrar dene
+                    } else {
+                        console.error("SignalR bağlantısı başarısız oldu. Maksimum deneme sayısına ulaşıldı.");
+                    }
+                });
+            }
+
+            startConnectionWithRetry();
+
+
+            connection.on("ReceiveMenuTable", (value) => {
+                console.log(value);
+                $("#tableData").empty();
+
+                for(var i = 0; value.length; i++)
+                {
+                let tablecol = 
+                `
+                <div class="col-md-3">
+                <div class="card card-stats ${value[i].status ? "card-success" : "card-danger"}">
+                <div class="card-body">
+                <div class="row">
+                <div class="col-5">
+                <div class="icon-big text-center">
+                <i class="bi ${value[i].status ? "bi-bookmark-fill" : "bi-bookmark"}"></i>
+                </div>
+                </div>
+                <div class="col-7 d-flex align-items-center">
+                <div class="numbers">
+                <p class="card-category">${value[i].name}</p>
+                <h4 class="card-title">${value[i].status ? "Dolu" : "Boş"}</h4>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                `
+                $("#tableData").append(tablecol);
+
+                }
+   
+            });
+
+
+
+        });
+    // </script>
+
+<div class="container-fluid">
+    <h4 class="page-title">Masa Durumu</h4>
+    <div class="row" id="tableData">
+        @* @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="card card-stats @(item.Status?"card-success":"card-danger")">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="bi @(item.Status?"bi-bookmark-fill":"bi-bookmark") "></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <div class="numbers">
+                                    <p class="card-category">@item.Name</p>
+                                    <h4 class="card-title">@(item.Status ? "Dolu" : "Boş")</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        } *@
+
+
+
+    </div>
+</div>

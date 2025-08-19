@@ -1,0 +1,33 @@
+﻿@model SignalRWebUI.Dtos.MenuTableDtos.UpdateMenuTableDto
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Layout.cshtml";
+}
+
+<div class="card p-3">
+    <div class="card-header">
+        <div class="card-title">Masa Ekle</div>
+    </div>
+    <form method="post">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="text" class="form-control" asp-for="Name" placeholder="İsim">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group d-flex">
+                        <label for="Status" style="margin: 0px !important; padding-right:10px">Durum</label>
+                        <input type="checkbox" style="position:static" asp-for="Status">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <button class="btn btn-success" type="submit">Kaydet</button>
+    </form>
+</div>
+

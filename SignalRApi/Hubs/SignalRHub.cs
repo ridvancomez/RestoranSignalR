@@ -113,6 +113,13 @@ namespace SignalRApi.Hubs
             await Clients.All.SendAsync("ReceiveMenuTableCount", menuTableCount);
         }
 
+        public async Task SendMenuTable()
+        {
+            var value = _menuTableService.TGetList();
+            await Clients.All.SendAsync("ReceiveMenuTable", value);
+        }
+
+
         public async Task GetBookingList()
         {
             var bookingList = _bookingService.TGetList();

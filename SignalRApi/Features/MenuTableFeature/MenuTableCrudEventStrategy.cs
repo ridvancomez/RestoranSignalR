@@ -20,6 +20,9 @@ namespace SignalRApi.Features.MenuTableFeature
         {
             var menuTableCount = _menuTableService.TMenuTableCount();
             await _hubContext.Clients.All.SendAsync("ReceiveMenuTableCount", menuTableCount);
+
+            var menuTableList = _menuTableService.TGetList();
+            await _hubContext.Clients.All.SendAsync("ReceiveMenuTable", menuTableList);
         }
     }
 }
